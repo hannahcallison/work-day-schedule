@@ -14,7 +14,7 @@ Users are able to type in the boxes assigned to an hour and save that task to th
 
 ## Product Screenshot gif
 
-To Be Uploaded...
+![Gif of Work Day Schedule functionality.A user clicks on slots on the color-coded calendar and edits the events.](./Work%20Day%20Scheduler.gif)
 
 **Link to published password generator:** 
 https://hannahcallison.github.io/work-day-schedule/

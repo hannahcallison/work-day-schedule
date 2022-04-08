@@ -1,11 +1,21 @@
-var saveBtn = $("#saveBtn")
+var saveBtn = $(".saveBtn")
+var clearBtn = $(".clearBtn")
 var nineBlockText = $("#nineBlock")
-// Setting date and time for header using moment.js library //
-var today = moment().format("dddd, MMMM Do YYYY, h:mm a");
-$('#currentDay').text(today)
+var tenBlockText = $("#tenBlock")
+var elevenBlockText = $("#elevenBlock")
+var twelveBlockText = $("#twelveBlock")
+var oneBlockText = $("#oneBlock")
+var twoBlockText = $("#twoBlock")
+var threeBlockText = $("#threeBlock")
+var fourBlockText = $("#fourBlock")
+var fiveBlockText = $("#fiveBlock")
+setInterval(textAreaColor, 1000)
 
 // Changing text area color based on time of day//
 function textAreaColor() {
+    // Setting date and time for header using moment.js library //
+    var today = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+    $('#currentDay').text(today)
     // Pulling current hour of the day to compare to timeblocks//
     var currentHour = new Date().getHours()
 
@@ -85,55 +95,48 @@ function textAreaColor() {
     }
 }
 
-
-saveBtn.on("click", function(){
-    console.log("success")
-    var textArea = nineBlockText.value
-    localStorage.setItem("savedTask", JSON.stringify(textArea));
+// Saving task text to local Storage on save button click//
+saveBtn.on("click", function () {
+    var textArea = $(this).siblings(".description").val()
+    var savedTask = $(this).siblings(".description").attr("id")
+    localStorage.setItem(savedTask, textArea)
 })
 
+// Clearing local Storage and saved text on click for end of day satisfaction//
+clearBtn.on("click", function () {
+    localStorage.setItem('nineBlock', "");
+    localStorage.setItem('tenBlock', "");
+    localStorage.setItem('elevenBlock', "");
+    localStorage.setItem('twelveBlock', "");
+    localStorage.setItem('oneBlock', "");
+    localStorage.setItem('twoBlock', "");
+    localStorage.setItem('threeBlock', "");
+    localStorage.setItem('fourBlock', "");
+    localStorage.setItem('fiveBlock', "");
+    nineBlockText.val("")
+    tenBlockText.val("")
+    elevenBlockText.val("")
+    twelveBlockText.val("")
+    oneBlockText.val("")
+    twoBlockText.val("")
+    threeBlockText.val("")
+    fourBlockText.val("")
+    fiveBlockText.val("")
+}
+)
 
+// Adding saved text to corresponding time block//
+function renderText() {
+    nineBlockText.val(localStorage.getItem('nineBlock'))
+    tenBlockText.val(localStorage.getItem('tenBlock'))
+    elevenBlockText.val(localStorage.getItem('elevenBlock'))
+    twelveBlockText.val(localStorage.getItem('twelveBlock'))
+    oneBlockText.val(localStorage.getItem('oneBlock'))
+    twoBlockText.val(localStorage.getItem('twoBlock'))
+    threeBlockText.val(localStorage.getItem('threeBlock'))
+    fourBlockText.val(localStorage.getItem('fourBlock'))
+    fiveBlockText.val(localStorage.getItem('fiveBlock'))
+}
 
-// var nineText = []
-// // Store saved data//
-// function renderSavedTasks() {
-//     nineBlockText.innerHTML = "";
-//     for (var i = 0; i < nineBlockText.length; i++) {
-//         var nineBlock = nineText[i];
-//         var p = document.createElement('p')
-//         p.text = nineBlock;
-//         p.setAttribute("data-index", i);
-
-//         nineBlockText.appendchild(p)
-//     }
-// }
-
-// function init() {
-//     var storedTasks = JSON.parse(localStorage.getItem("nineText"))
-//     if (storedTasks !== null) {
-//         nineText = storedTasks
-//     }
-//     renderSavedTasks()
-// }
-
-// function storeTasks() {
-//     localStorage.setItem("tasks", JSON.stringify(nineText))
-// }
-
-// saveBtn.addEventListener("click", function(event) {
-//     event.preventDefault();
-//     var pText = nineBlockText.value.trim();
-//     if (pText === ""){
-//         return;
-//     }
-//     nineText.push(pText);
-//     storeTasks();
-//     renderSavedTasks();
-// })
-
-// init()
-
-// Pseudo Code//
-// Basically on submit/click text from that specific text area is "saved" via local storage and appended to that specific text area//Are you able to keep typing after that?? I guess local storage needs to throw it back up as a string??/this parent $(this.parent.index)???//
-
+renderText()
 textAreaColor()

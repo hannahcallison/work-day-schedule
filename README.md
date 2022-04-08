@@ -17,5 +17,4 @@ Users are able to type in the boxes assigned to an hour and save that task to th
 To Be Uploaded...
 
 **Link to published password generator:** 
-
-To Be Uploaded...
+https://hannahcallison.github.io/work-day-schedule/
